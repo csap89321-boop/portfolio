@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumedh Srujan | Photonics & Optical Engineering</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }AZ
+        html {
+            scroll-behavior: smooth;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-gradient {
+            background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+        }
+        .card-glow:hover {
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.15);
+        }
+        .wave-animation {
+            animation: wave 8s ease-in-out infinite;
+        }
+        @keyframes wave {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .code-block {
+            background: linear-gradient(135deg, #1e1e2e 0%, #11111b 100%);
+        }
+        .timeline-line {
+            background: linear-gradient(to bottom, #6366f1, #a855f7, #ec4899);
+        }
+        .metric-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        .nav-active {
+            color: #818cf8;
+            border-bottom: 2px solid #818cf8;
+        }
+        .visual-placeholder {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px dashed rgba(99, 102, 241, 0.3);
+        }
+        .skill-bar {
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+        }
+        .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
+        }
+        .bg-gradient-radial {
+            background: radial-gradient(ellipse at center, var(--tw-gradient-from) 0%, var(--tw-gradient-via) 40%, var(--tw-gradient-to) 70%);
+        }
+        .from-red-500 { --tw-gradient-from: #ef4444; }
+        .from-yellow-300 { --tw-gradient-from: #fde047; }
+        .from-white { --tw-gradient-from: #ffffff; }
+        .via-yellow-400 { --tw-gradient-via: #facc15; }
+        .via-yellow-200 { --tw-gradient-via: #fef08a; }
+        .via-orange-400 { --tw-gradient-via: #fb923c; }
+        .to-transparent { --tw-gradient-to: transparent; }
+        .blur-xs { filter: blur(2px); }
+        
+        /* Canvas Ring Resonator Animation Styles */
+        .resonator-canvas-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            height: 350px;
+            background: linear-gradient(135deg, #0a0a0f 0%, #0d1117 50%, #0a0a0f 100%);
+            border-radius: 1.5rem;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .resonator-canvas-container canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .canvas-labels span {
+            position: absolute;
+            color: #6366f1;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-950/80 backdrop-blur-xl border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#home" class="text-xl font-bold gradient-text">CS</a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors pb-1">Home</a>
+                    <a href="#research" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors pb-1">Research</a>
+                    <a href="#projects" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors pb-1">Projects</a>
+                    <a href="#computational" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors pb-1">Computational Photonics</a>
+                    <a href="#skills" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors pb-1">Skills</a>
+                    <a href="#contact" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm font-medium transition-colors">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 space-y-3">
+                <a href="#home" class="block text-gray-400 hover:text-white">Home</a>
+                <a href="#research" class="block text-gray-400 hover:text-white">Research</a>
+                <a href="#projects" class="block text-gray-400 hover:text-white">Projects</a>
+                <a href="#computational" class="block text-gray-400 hover:text-white">Computational Photonics</a>
+                <a href="#skills" class="block text-gray-400 hover:text-white">Skills</a>
+                <a href="#contact" class="block text-gray-400 hover:text-white">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen hero-gradient flex items-center pt-20 relative overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl floating"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl floating" style="animation-delay: -2s;"></div>
+            <!-- Light Wave Illustration -->
+            <svg class="absolute bottom-0 left-0 right-0 w-full opacity-20 wave-animation" viewBox="0 0 1440 320" fill="none">
+                <path fill="url(#wave-gradient)" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                <defs>
+                    <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#6366f1"/>
+                        <stop offset="50%" stop-color="#a855f7"/>
+                        <stop offset="100%" stop-color="#ec4899"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-4 py-2 mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-sm text-indigo-300">Open to Research & R&D Opportunities</span>
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+                        <span class="text-white">Chittilla</span><br>
+                        <span class="gradient-text">Sumedh Srujan</span>
+                    </h1>
+                    <p class="text-xl text-gray-400 mb-4 font-medium">
+                        Photonics Researcher & Simulation Engineer
+                    </p>
+                    <p class="text-lg text-gray-500 mb-8 max-w-xl leading-relaxed">
+                        M.Sc. Tech Physics (Photonics) candidate bridging theoretical physics with applied engineering through Python automation and advanced optical simulation.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mb-10">
+                        <a href="#research" class="bg-indigo-600 hover:bg-indigo-500 px-6 py-3 rounded-xl font-medium transition-all hover:scale-105 flex items-center gap-2">
+                            <span>View Research</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                        <a href="#computational" class="border border-gray-700 hover:border-indigo-500 px-6 py-3 rounded-xl font-medium transition-all hover:bg-gray-900 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                            <span>Code + Physics</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile Photo -->
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <!-- Decorative ring behind photo -->
+                        <div class="absolute -inset-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full opacity-20 blur-xl animate-pulse"></div>
+                        <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full opacity-75"></div>
+                        <!-- Profile Image -->
+                        <img 
+                            src="https://iili.io/fScsb5B.md.jpg" 
+                            alt="Chittilla Sumedh Srujan - Photonics Researcher" 
+                            class="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full object-cover border-4 border-gray-900"
+                            style="object-position: center 20%;"
+                        >
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-24 bg-gray-900/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider mb-3">About Me</h2>
+                    <h3 class="text-4xl font-bold mb-6">Where Physics Meets <span class="gradient-text">Code</span></h3>
+                    <div class="space-y-4 text-gray-400 leading-relaxed">
+                        <p>
+                            I'm a <span class="text-white font-medium">Photonics researcher</span> pursuing my M.Sc. Tech in Physics at NIT Warangal, with a focused specialization in integrated photonics and optical engineering. My work exists at the intersection where theoretical physics converges with practical engineering solutions.
+                        </p>
+                        <p>
+                            What sets my approach apart is the <span class="text-white font-medium">fusion of rigorous physics understanding with Python-driven automation</span>. Rather than treating simulation software as black boxes, I develop custom scripting solutions that accelerate research workflows—from automated dispersion engineering modules to API-driven optical optimization routines.
+                        </p>
+                        <p>
+                            My research contributions span <span class="text-indigo-400">silicon photonics device design</span>, <span class="text-purple-400">electro-optic modulator development</span>, and <span class="text-pink-400">free-space to fiber coupling systems</span>. I believe the future of photonics R&D lies in researchers who can not only design devices but also build the computational tools that make research faster and more reproducible.
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <!-- Education Cards -->
+                    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-glow transition-all">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">M.Sc. Tech Physics (Photonics)</h4>
+                                <p class="text-indigo-400 text-sm mb-2">NIT Warangal • 2023 - 2027</p>
+                                <p class="text-gray-500 text-sm">Specialization in Integrated Photonics, Optical Device Simulation, and Computational Methods</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-glow transition-all">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">B.Sc. Physics</h4>
+                                <p class="text-purple-400 text-sm mb-2">Amrita Vishwa Vidyapeetham • 2020 - 2023</p>
+                                <p class="text-gray-500 text-sm">Foundation in Classical & Quantum Physics, Mathematical Methods</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Award Highlight -->
+                    <div class="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/30 rounded-2xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Best Research Paper Award</h4>
+                                <p class="text-amber-400 text-sm mb-2">SAP 2025 • IIT Indore</p>
+                                <p class="text-gray-400 text-sm">High-Efficiency Hybrid Silicon-HfO₂-ITO Electro-Optic Modulator</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="h-px section-divider"></div>
+
+    <!-- Ring Resonator Animation Section -->
+    <section class="py-16 bg-gray-950 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-8">
+                <h2 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider mb-3">Interactive Visualization</h2>
+                <h3 class="text-3xl font-bold mb-4">Silicon Photonics <span class="gradient-text">Add-Drop Ring Resonator</span></h3>
+                <p class="text-gray-500 max-w-2xl mx-auto text-sm">Watch light couple from the input bus waveguide into the ring resonator via evanescent field, circulate to build intensity, and couple out to the drop port.</p>
+            </div>
+            
+            <!-- Canvas-based Ring Resonator Animation -->
+            <div class="resonator-canvas-container">
+                <canvas id="ringCanvas"></canvas>
+                <div class="canvas-labels">
+                    <span style="top: 10px; left: 10px;">Input Port</span>
+                    <span style="top: 10px; right: 10px;">Through Port</span>
+                    <span style="bottom: 10px; right: 10px;">Drop Port</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="h-px section-divider"></div>
+
+    <!-- Research Section -->
+    <section id="research" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider mb-3">Research Experience</h2>
+                <h3 class="text-4xl font-bold mb-4">Academic Research & <span class="gradient-text">Publications</span></h3>
+                <p class="text-gray-500 max-w-2xl mx-auto">Deep-dive case studies into my research contributions, presented using the STAR methodology to demonstrate problem-solving approach and quantifiable impact.</p>
+            </div>
+
+            <!-- Research Case Study 1: IIT Delhi -->
+            <div class="mb-16">
+                <div class="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden card-glow transition-all">
+                    <div class="bg-gradient-to-r from-indigo-600/20 to-purple-600/20 px-8 py-6 border-b border-gray-800">
+                        <div class="flex flex-wrap items-center justify-between gap-4">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="bg-indigo-500/20 text-indigo-400 text-xs font-semibold px-3 py-1 rounded-full">Research Internship</span>
+                                    <span class="text-gray-500 text-sm">April 2025</span>
+                                </div>
+                                <h4 class="text-2xl font-bold text-white">Si₃N₄ Waveguide Design for Integrated Photonics</h4>
+                                <p class="text-indigo-400 font-medium">Indian Institute of Technology, Delhi</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <span class="mono text-xs bg-gray-800 px-3 py-1 rounded-lg text-gray-400">Lumerical MODE</span>
+                                <span class="mono text-xs bg-gray-800 px-3 py-1 rounded-lg text-gray-400">Lumerical FDTD</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div class="space-y-6">
+                                <!-- STAR Method -->
+                                <div>
+                                    <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                        <span class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400 text-sm font-bold">S</span>
+                                        Situation
+                                    </h5>
+                                    <p class="text-gray-400 leading-relaxed">Silicon Nitride (Si₃N₄) waveguides are critical building blocks for next-generation photonic integrated circuits due to their low optical loss and CMOS compatibility. The research group required optimized waveguide geometries for both visible (700nm) and telecom (1550nm) wavelengths to enable multi-application platform development.</p>
+                                </div>
+                                <div>
+                                    <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                        <span class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center text-green-400 text-sm font-bold">T</span>
+                                        Task
+                                    </h5>
+                                    <p class="text-gray-400 leading-relaxed">Design and characterize Si₃N₄ waveguide structures that achieve optimal mode confinement while minimizing propagation losses. Subsequently, integrate these waveguides with high-Q ring resonators for sensing and filtering applications.</p>
+                                </div>
+                                <div>
+                                    <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                        <span class="w-8 h-8 bg-amber-500/20 rounded-lg flex items-center justify-center text-amber-400 text-sm font-bold">A</span>
+                                        Action
+                                    </h5>
+                                    <p class="text-gray-400 leading-relaxed">Utilized Lumerical MODE Solutions to perform eigenmode analysis, sweeping waveguide dimensions to map confinement factor vs. geometry. Characterized bending losses and coupling coefficients using FDTD simulations. Designed ring resonator structures with optimized gap spacing for critical coupling conditions.</p>
+                                </div>
+                                <div>
+                                    <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                        <span class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center text-purple-400 text-sm font-bold">R</span>
+                                        Result
+                                    </h5>
+                                    <p class="text-gray-400 leading-relaxed">Successfully delivered characterized waveguide designs with documented mode profiles, loss metrics, and ring resonator integration guidelines. The designs formed the foundation for the group's subsequent fabrication run.</p>
+                                </div>
+                            </div>
+                            <div class="space-y-6">
+                                <!-- Mode Profile Visualization -->
+                                <div class="rounded-2xl overflow-hidden h-64 relative bg-gray-900 border border-gray-700">
+                                    <!-- Option 1: Replace with your own image -->
+                                    <!-- Uncomment and add your image URL below -->
+                                    <!-- <img src="YOUR_MODE_PROFILE_IMAGE.png" alt="TE/TM Mode Profile" class="w-full h-full object-cover"> -->
+                                    
+                                    <!-- Option 2: Simulated Mode Profile (CSS/SVG Visualization) -->
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <!-- Gaussian-like mode profile simulation -->
+                                        <div class="relative w-48 h-48">
+                                            <!-- Core intensity (brightest center) -->
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-32 h-24 rounded-full bg-gradient-radial from-red-500 via-yellow-400 to-transparent opacity-90 blur-sm"></div>
+                                            </div>
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-24 h-16 rounded-full bg-gradient-radial from-yellow-300 via-orange-400 to-transparent opacity-95 blur-xs"></div>
+                                            </div>
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-16 h-10 rounded-full bg-gradient-radial from-white via-yellow-200 to-transparent opacity-100"></div>
+                                            </div>
+                                            <!-- Waveguide outline -->
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-28 h-20 border-2 border-dashed border-gray-500 rounded-sm"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Labels -->
+                                    <div class="absolute top-3 left-3 bg-black/60 px-2 py-1 rounded text-xs text-white font-medium">TE₀₀ Mode</div>
+                                    <div class="absolute bottom-3 left-3 right-3 flex justify-between text-xs text-gray-400">
+                                        <span>λ = 1550nm</span>
+                                        <span>Si₃N₄ Core</span>
+                                    </div>
+                                    <!-- Color scale bar -->
+                                    <div class="absolute top-3 right-3 bottom-12 w-4 rounded-sm overflow-hidden">
+                                        <div class="h-full w-full bg-gradient-to-b from-white via-yellow-400 via-orange-500 via-red-600 to-blue-900"></div>
+                                    </div>
+                                    <div class="absolute top-3 right-8 text-xs text-gray-400">1.0</div>
+                                    <div class="absolute bottom-12 right-8 text-xs text-gray-400">0.0</div>
+                                </div>
+                                <!-- Suggested Visuals -->
+                                <div class="bg-gray-800/50 rounded-xl p-5">
+                                    <h6 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                                        <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                        </svg>
+                                        Recommended Visuals
+                                    </h6>
+                                    <ul class="space-y-2 text-sm text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-indigo-400 mt-1">•</span>
+                                            <span>2D mode profile plots (Ex, Ey field components)</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-indigo-400 mt-1">•</span>
+                                            <span>Confinement factor vs. waveguide width sweep</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-indigo-400 mt-1">•</span>
+                                            <span>Ring resonator transmission spectrum</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-indigo-400 mt-1">•</span>
+                                            <span>FDTD field propagation animation</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Research Case Study 2: Best Paper Award -->
+            <div class="mb-16">
+                <div class="bg-gray-900 border border-amber-500/30 rounded-3xl overflow-hidden card-glow transition-all">
+                    <div class="bg-gradient-to-r from-amber-600/20 to-orange-600/20 px-8 py-6 border-b border-amber-500/20">
+                        <div class="flex flex-wrap items-center justify-between gap-4">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="bg-amber-500/20 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                                        Best Research Paper
+                                    </span>
+                                    <span class="text-gray-500 text-sm">SAP 2025 • IIT Indore</span>
+                                </div>
+                                <h4 class="text-2xl font-bold text-white">High-Efficiency Hybrid Silicon-HfO₂-ITO Electro-Optic Modulator</h4>
+                                <p class="text-amber-400 font-medium">Award-Winning Publication</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <span class="mono text-xs bg-gray-800 px-3 py-1 rounded-lg text-gray-400">Lumerical CHARGE</span>
+                                <span class="mono text-xs bg-gray-800 px-3 py-1 rounded-lg text-gray-400">INTERCONNECT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div class="space-y-6">
+                                <div>
+                                    <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                        <span class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400 text-sm font-bold">S</span>
+                                        Situation
+                                    </h5>
+                                    <p class="text-gray-400 leading-relaxed">Conventional silicon electro-optic modulators are limited by the weak plasma dispersion effect, requiring long device lengths or high voltages for adequate modulation depth. The photonics community actively seeks novel material platforms to achieve compact, low-power modulators for data center interconnects.</p>
+                                </div>
+                                <div>
+                                    <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                        <span class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center text-green-400 text-sm font-bold">T</span>
+                                        Task
+                                    </h5>
+                                    <p class="text-gray-400 leading-relaxed">Design a hybrid modulator architecture leveraging Transparent Conducting Oxides (ITO) with epsilon-near-zero (ENZ) properties to achieve superior modulation efficiency compared to pure silicon approaches, while maintaining practical voltage requirements.</p>
+                                </div>
+                                <div>
+                                    <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                        <span class="w-8 h-8 bg-amber-500/20 rounded-lg flex items-center justify-center text-amber-400 text-sm font-bold">A</span>
+                                        Action
+                                    </h5>
+                                    <p class="text-gray-400 leading-relaxed">Developed a Si/HfO₂/ITO hybrid slot waveguide modulator architecture. Used Lumerical CHARGE to model carrier accumulation in the ITO layer and resulting permittivity modulation. Coupled electro-optical simulation to INTERCONNECT for system-level performance analysis including bandwidth estimation.</p>
+                                </div>
+                                <div>
+                                    <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                        <span class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center text-purple-400 text-sm font-bold">R</span>
+                                        Result
+                                    </h5>
+                                    <p class="text-gray-400 leading-relaxed">Achieved <span class="text-white font-semibold">1.07 nm/V modulation efficiency</span> (among the highest reported for ITO-based modulators) and <span class="text-white font-semibold">11.12 dB extinction ratio at 4V</span>. The work received the Best Research Paper Award at SAP 2025, IIT Indore.</p>
+                                </div>
+                            </div>
+                            <div class="space-y-6">
+                                <!-- Key Metrics -->
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="metric-card rounded-xl p-5 text-center">
+                                        <div class="text-3xl font-bold gradient-text mb-1">1.07</div>
+                                        <div class="text-xs text-gray-400">nm/V Efficiency</div>
+                                    </div>
+                                    <div class="metric-card rounded-xl p-5 text-center">
+                                        <div class="text-3xl font-bold gradient-text mb-1">11.12</div>
+                                        <div class="text-xs text-gray-400">dB Extinction @ 4V</div>
+                                    </div>
+                                </div>
+                                <!-- Visual Placeholder -->
+                                <div class="visual-placeholder rounded-2xl p-6 h-48 flex flex-col items-center justify-center">
+                                    <svg class="w-12 h-12 text-amber-500/50 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                    <p class="text-gray-500 text-sm">Modulation Curve</p>
+                                    <p class="text-gray-600 text-xs mt-1">Wavelength shift vs. applied voltage</p>
+                                </div>
+                                <!-- Suggested Visuals -->
+                                <div class="bg-gray-800/50 rounded-xl p-5">
+                                    <h6 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                                        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                        </svg>
+                                        Recommended Visuals
+                                    </h6>
+                                    <ul class="space-y-2 text-sm text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-amber-400 mt-1">•</span>
+                                            <span>Device cross-section schematic with layer stack</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-amber-400 mt-1">•</span>
+                                            <span>ITO permittivity vs. carrier concentration plot</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-amber-400 mt-1">•</span>
+                                            <span>Transmission spectrum at different bias voltages</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-amber-400 mt-1">•</span>
+                                            <span>Comparison table vs. literature values</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="h-px section-divider"></div>
+
+    <!-- Engineering Projects Section -->
+    <section id="projects" class="py-24 bg-gray-900/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider mb-3">Engineering Projects</h2>
+                <h3 class="text-4xl font-bold mb-4">Applied Photonics <span class="gradient-text">Engineering</span></h3>
+                <p class="text-gray-500 max-w-2xl mx-auto">Projects demonstrating practical application of optical engineering principles with emphasis on simulation-driven design and Python automation.</p>
+            </div>
+
+            <!-- Project: Sunlight to Fiber Coupling -->
+            <div class="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden mb-8 card-glow transition-all">
+                <div class="bg-gradient-to-r from-cyan-600/20 to-blue-600/20 px-8 py-6 border-b border-gray-800">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-cyan-500/20 text-cyan-400 text-xs font-semibold px-3 py-1 rounded-full">Featured Project</span>
+                                <span class="text-gray-500 text-sm">November 2025</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-white">Sunlight to Fiber Coupling System</h4>
+                            <p class="text-cyan-400 font-medium">API-Driven Optical Optimization</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="mono text-xs bg-gray-800 px-3 py-1 rounded-lg text-gray-400">Zemax OpticStudio</span>
+                            <span class="mono text-xs bg-gray-800 px-3 py-1 rounded-lg text-gray-400">ZOS-API (Python)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div>
+                                <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                    <span class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400 text-sm font-bold">S</span>
+                                    Situation
+                                </h5>
+                                <p class="text-gray-400 leading-relaxed">Coupling broadband sunlight into optical fiber systems is challenging due to the extended angular extent of the solar disk, chromatic aberration across the visible spectrum, and stringent alignment tolerances. Efficient solar-to-fiber coupling enables applications in daylighting, solar concentration, and spectroscopic systems.</p>
+                            </div>
+                            <div>
+                                <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                    <span class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center text-green-400 text-sm font-bold">T</span>
+                                    Task
+                                </h5>
+                                <p class="text-gray-400 leading-relaxed">Design an optimized optical coupling stage that maximizes power transfer from a sunlight collection system into a multimode optical fiber, surpassing baseline efficiency through systematic optical design optimization.</p>
+                            </div>
+                            <div>
+                                <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                    <span class="w-8 h-8 bg-amber-500/20 rounded-lg flex items-center justify-center text-amber-400 text-sm font-bold">A</span>
+                                    Action
+                                </h5>
+                                <p class="text-gray-400 leading-relaxed">Leveraged the <span class="text-cyan-400 font-medium">Zemax ZOS-API with Python</span> to automate the optimization workflow. Explored PMMA ball lens configurations through programmatic parameter sweeps. Designed a hybrid optical stage incorporating an achromatic doublet to minimize chromatic focal shift. Implemented automated merit function evaluation for coupling efficiency.</p>
+                            </div>
+                            <div>
+                                <h5 class="flex items-center gap-2 text-lg font-semibold text-white mb-3">
+                                    <span class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center text-purple-400 text-sm font-bold">R</span>
+                                    Result
+                                </h5>
+                                <p class="text-gray-400 leading-relaxed">Achieved <span class="text-white font-semibold">~12% improvement in coupling efficiency</span>, reaching <span class="text-white font-semibold">75.98% overall efficiency</span>. The Python automation reduced design iteration time from hours of manual GUI work to minutes of scripted optimization.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <!-- Key Metric -->
+                            <div class="metric-card rounded-xl p-6 text-center">
+                                <div class="text-5xl font-bold gradient-text mb-2">75.98%</div>
+                                <div class="text-sm text-gray-400">Coupling Efficiency Achieved</div>
+                                <div class="text-xs text-green-400 mt-2">↑ 12% improvement over baseline</div>
+                            </div>
+                            <!-- Code Snippet Preview -->
+                            <div class="code-block rounded-xl p-5 overflow-hidden">
+                                <div class="flex items-center gap-2 mb-4">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                    <span class="text-gray-500 text-xs ml-2 mono">zemax_optimization.py</span>
+                                </div>
+                                <pre class="mono text-xs text-gray-300 overflow-x-auto"><code><span class="text-purple-400">import</span> zosapi
+<span class="text-purple-400">from</span> zosapi <span class="text-purple-400">import</span> constants
+
+<span class="text-gray-500"># Initialize ZOS-API connection</span>
+zos = zosapi.App()
+TheSystem = zos.PrimarySystem
+
+<span class="text-gray-500"># Automated ball lens sweep</span>
+<span class="text-purple-400">for</span> radius <span class="text-purple-400">in</span> np.linspace(<span class="text-cyan-400">2.0</span>, <span class="text-cyan-400">5.0</span>, <span class="text-cyan-400">50</span>):
+    set_lens_radius(TheSystem, radius)
+    efficiency = evaluate_coupling()
+    results.append((radius, efficiency))</code></pre>
+                            </div>
+                            <!-- Suggested Visuals -->
+                            <div class="bg-gray-800/50 rounded-xl p-5">
+                                <h6 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                    Recommended Visuals
+                                </h6>
+                                <ul class="space-y-2 text-sm text-gray-400">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-cyan-400 mt-1">•</span>
+                                        <span>Ray trace diagram showing light path to fiber</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-cyan-400 mt-1">•</span>
+                                        <span>Spot diagram at fiber face vs. fiber core size</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-cyan-400 mt-1">•</span>
+                                        <span>Efficiency vs. ball lens radius optimization curve</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-cyan-400 mt-1">•</span>
+                                        <span>ZOS-API workflow diagram</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Projects Grid -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Metalens Project -->
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-glow transition-all">
+                    <div class="flex items-start justify-between mb-4">
+                        <span class="bg-pink-500/20 text-pink-400 text-xs font-semibold px-3 py-1 rounded-full">Metasurfaces</span>
+                        <span class="mono text-xs text-gray-500">MetaCraft + HDF5</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Large-Scale Monochromatic Metalens</h4>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed">Designed a metalens optimized for 532nm operation using MetaCraft software. Implemented a library-based phase mapping approach to bypass computationally expensive RCWA simulations, enabling rapid large-scale metalens design. Exported structures to HDF5 format for Zemax integration.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-gray-800 px-2 py-1 rounded text-gray-400">532nm Design</span>
+                        <span class="text-xs bg-gray-800 px-2 py-1 rounded text-gray-400">RCWA Bypass</span>
+                        <span class="text-xs bg-gray-800 px-2 py-1 rounded text-gray-400">HDF5 Export</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="h-px section-divider"></div>
+
+    <!-- Computational Photonics Section -->
+    <section id="computational" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <div>
+                    <h2 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider mb-3">The Code + Physics Angle</h2>
+                    <h3 class="text-4xl font-bold mb-6">Computational <span class="gradient-text">Photonics</span></h3>
+                    <p class="text-xl text-gray-400 mb-8 leading-relaxed">
+                        Building tools that accelerate photonics research—not just running simulations, but engineering the infrastructure that makes simulation workflows faster, more reproducible, and more powerful.
+                    </p>
+                    
+                    <div class="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-2xl p-6 mb-8">
+                        <h4 class="font-semibold text-white mb-3 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            The Value Proposition
+                        </h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Every hour spent manually clicking through GUI-based simulation tools is an hour not spent on research insights. By developing Python-based automation layers for industry-standard photonics software, I transform repetitive design tasks into reproducible, parameterized workflows. This approach doesn't replace physics intuition—it amplifies it by enabling rapid exploration of design spaces that would be impractical to explore manually.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="font-medium text-white">Reproducible Research</h5>
+                                <p class="text-sm text-gray-500">Scripts document every parameter choice, enabling exact reproduction of results</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="font-medium text-white">Accelerated Iteration</h5>
+                                <p class="text-sm text-gray-500">Parameter sweeps that took days now complete in hours</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="font-medium text-white">Knowledge Transfer</h5>
+                                <p class="text-sm text-gray-500">Tools and libraries can be shared across research groups</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Featured Tool: Automated Photonic Component Library -->
+                    <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
+                        <div class="bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 px-6 py-4 border-b border-gray-800">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-violet-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Automated Photonic Component Library</h4>
+                                    <p class="text-sm text-violet-400">Python Module • October 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                A custom Python library that automates two critical and time-consuming tasks in integrated photonics design:
+                            </p>
+                            <div class="space-y-3">
+                                <div class="bg-gray-800/50 rounded-xl p-4">
+                                    <h5 class="font-medium text-white text-sm mb-2 flex items-center gap-2">
+                                        <span class="w-6 h-6 bg-indigo-500/20 rounded flex items-center justify-center text-indigo-400 text-xs">1</span>
+                                        Waveguide Dispersion Engineering Module
+                                    </h5>
+                                    <p class="text-gray-500 text-xs">Calculates effective index, group index, and GVD as functions of waveguide geometry. Replaces manual parameter sweeps in Lumerical MODE with programmatic exploration.</p>
+                                </div>
+                                <div class="bg-gray-800/50 rounded-xl p-4">
+                                    <h5 class="font-medium text-white text-sm mb-2 flex items-center gap-2">
+                                        <span class="w-6 h-6 bg-purple-500/20 rounded flex items-center justify-center text-purple-400 text-xs">2</span>
+                                        Ring Resonator Coupling Calculator
+                                    </h5>
+                                    <p class="text-gray-500 text-xs">Computes coupling coefficients and through/drop transmission for ring resonators. Eliminates the need for manual GUI estimation, providing instant analytical results.</p>
+                                </div>
+                            </div>
+                            <!-- Code Preview -->
+                            <div class="code-block rounded-xl p-4">
+                                <pre class="mono text-xs text-gray-300 overflow-x-auto"><code><span class="text-purple-400">from</span> photonic_lib <span class="text-purple-400">import</span> WaveguideDispersion, RingCoupling
+
+<span class="text-gray-500"># Calculate dispersion for Si3N4 waveguide</span>
+wg = WaveguideDispersion(
+    material=<span class="text-green-400">"Si3N4"</span>,
+    width=<span class="text-cyan-400">800e-9</span>,  <span class="text-gray-500"># 800 nm</span>
+    height=<span class="text-cyan-400">400e-9</span>
+)
+n_eff, n_g, GVD = wg.calculate(wavelength=<span class="text-cyan-400">1550e-9</span>)
+
+<span class="text-gray-500"># Estimate ring coupling</span>
+ring = RingCoupling(radius=<span class="text-cyan-400">20e-6</span>, gap=<span class="text-cyan-400">200e-9</span>)
+kappa, through, drop = ring.analyze()</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Impact Statement -->
+                    <div class="bg-gray-800/30 border border-gray-700/50 rounded-xl p-5">
+                        <h5 class="font-semibold text-white mb-3 text-sm">Why This Matters to Employers</h5>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            In R&D environments, time-to-insight is critical. This library demonstrates the ability to identify workflow bottlenecks and engineer solutions that benefit entire teams. It's not about replacing commercial software—it's about building the glue code that makes commercial software more powerful and accessible to researchers who may not have scripting expertise.
+                        </p>
+                    </div>
+
+                    <!-- Suggested Visuals -->
+                    <div class="bg-gray-800/50 rounded-xl p-5">
+                        <h6 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            Portfolio Visual Suggestions
+                        </h6>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-violet-400 mt-1">•</span>
+                                <span>GitHub-style code snippets showing clean API design</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-violet-400 mt-1">•</span>
+                                <span>Dispersion curve outputs (n_eff vs λ) generated by the library</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-violet-400 mt-1">•</span>
+                                <span>Workflow diagram: Manual GUI → Python Script comparison</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-violet-400 mt-1">•</span>
+                                <span>Time savings metrics (e.g., "10 hours → 15 minutes")</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="h-px section-divider"></div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-gray-900/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider mb-3">Technical Expertise</h2>
+                <h3 class="text-4xl font-bold mb-4">Skills & <span class="gradient-text">Tools</span></h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Programming -->
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-glow transition-all">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold text-white mb-4">Programming</h4>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Python</span>
+                                <span class="text-gray-500">Advanced</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="h-full skill-bar rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">C++</span>
+                                <span class="text-gray-500">Intermediate</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="h-full skill-bar rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulation Software -->
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-glow transition-all">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold text-white mb-4">Lumerical Suite</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-purple-500/10 text-purple-400 px-3 py-1 rounded-full">MODE</span>
+                        <span class="text-xs bg-purple-500/10 text-purple-400 px-3 py-1 rounded-full">FDTD</span>
+                        <span class="text-xs bg-purple-500/10 text-purple-400 px-3 py-1 rounded-full">CHARGE</span>
+                        <span class="text-xs bg-purple-500/10 text-purple-400 px-3 py-1 rounded-full">INTERCONNECT</span>
+                    </div>
+                </div>
+
+                <!-- Optical Design -->
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-glow transition-all">
+                    <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold text-white mb-4">Optical Design</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full">Zemax OpticStudio</span>
+                        <span class="text-xs bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full">ZOS-API</span>
+                        <span class="text-xs bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full">MetaCraft</span>
+                    </div>
+                </div>
+
+                <!-- Domain Knowledge -->
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-glow transition-all">
+                    <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold text-white mb-4">Domain Expertise</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-pink-500/10 text-pink-400 px-3 py-1 rounded-full">Silicon Photonics</span>
+                        <span class="text-xs bg-pink-500/10 text-pink-400 px-3 py-1 rounded-full">Waveguides</span>
+                        <span class="text-xs bg-pink-500/10 text-pink-400 px-3 py-1 rounded-full">Resonators</span>
+                        <span class="text-xs bg-pink-500/10 text-pink-400 px-3 py-1 rounded-full">Modulators</span>
+                        <span class="text-xs bg-pink-500/10 text-pink-400 px-3 py-1 rounded-full">Metalenses</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider mb-3">Get In Touch</h2>
+            <h3 class="text-4xl font-bold mb-6">Let's <span class="gradient-text">Collaborate</span></h3>
+            <p class="text-gray-400 mb-10 max-w-2xl mx-auto">
+                I'm actively seeking research internships, R&D positions, and collaboration opportunities in photonics, optical engineering, and computational physics.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <a href="mailto:cs24phc1r16@student.nitw.ac.in" class="bg-indigo-600 hover:bg-indigo-500 px-8 py-4 rounded-xl font-medium transition-all hover:scale-105 flex items-center gap-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    Send Email
+                </a>
+                <a href="https://www.linkedin.com/in/chittilla-sumedh-srujan-8a1829315/" target="_blank" rel="noopener noreferrer" class="border border-gray-700 hover:border-indigo-500 px-8 py-4 rounded-xl font-medium transition-all hover:bg-gray-900 flex items-center gap-3">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/csap89321-boop/Photonic-simulation-suite.git" target="_blank" rel="noopener noreferrer" class="border border-gray-700 hover:border-indigo-500 px-8 py-4 rounded-xl font-medium transition-all hover:bg-gray-900 flex items-center gap-3">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+
+            <p class="text-gray-600 text-sm">
+                Chittilla Sumedh Srujan • NIT Warangal
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2025 Chittilla Sumedh Srujan. All rights reserved.</p>
+                <p class="text-gray-600 text-sm">Designed for Photonics & Optical Engineering Opportunities</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Active nav link highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function highlightNavLink() {
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('nav-active', 'text-white');
+                        link.classList.add('text-gray-400');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('nav-active', 'text-white');
+                            link.classList.remove('text-gray-400');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNavLink);
+        highlightNavLink();
+
+        // Smooth reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Ring Resonator Canvas Animation
+        const canvas = document.getElementById('ringCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Configuration
+        let width, height;
+        const waveguideWidth = 12;
+        const speed = 2.5;
+        const couplingRatio = 0.4; // 40% couples out, 60% stays in ring
+        const minVisibleIntensity = 0.03; // Threshold for "light is dead"
+        
+        // Gaussian pulse parameters
+        const pulseWidth = 35; // Width of Gaussian pulse
+        const numPulsePoints = 20; // Number of points to draw the pulse
+        
+        // Wave Packets with intensity tracking
+        let inputPulse = { x: 0, active: true, intensity: 1.0 };
+        let throughPulse = { x: 0, active: false, intensity: 0 };
+        let dropPulse = { x: 0, active: false, intensity: 0 };
+        
+        // Ring state - can have light circulating continuously
+        let ringLight = {
+            active: false,
+            angle: -Math.PI / 2, // Start at top (coupling point)
+            intensity: 0,
+            hasCoupledBottom: false, // Track if we've coupled at bottom this rotation
+            hasCoupledTop: false // Track if we've coupled at top this rotation
+        };
+        
+        // State for waiting before restart
+        let waitingToRestart = false;
+        let restartTimer = null;
+
+        // Resize handling
+        function resize() {
+            width = canvas.offsetWidth;
+            height = canvas.offsetHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Gaussian function
+        function gaussian(x, mean, sigma) {
+            return Math.exp(-0.5 * Math.pow((x - mean) / sigma, 2));
+        }
+
+        function drawWaveguide(x1, y1, x2, y2) {
+            ctx.beginPath();
+            ctx.strokeStyle = '#2a2a3a'; // Silicon color
+            ctx.lineWidth = waveguideWidth;
+            ctx.lineCap = 'round';
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+            
+            // Add subtle core highlight
+            ctx.beginPath();
+            ctx.strokeStyle = '#3a3a4a';
+            ctx.lineWidth = waveguideWidth - 4;
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+        }
+
+        function drawRing(cx, cy, radius) {
+            ctx.beginPath();
+            ctx.strokeStyle = '#2a2a3a';
+            ctx.lineWidth = waveguideWidth;
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Core highlight
+            ctx.beginPath();
+            ctx.strokeStyle = '#3a3a4a';
+            ctx.lineWidth = waveguideWidth - 4;
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        // Draw Gaussian pulse along a horizontal waveguide
+        function drawGaussianPulseHorizontal(centerX, y, intensity, direction = 1) {
+            if (intensity <= minVisibleIntensity) return;
+            
+            const sigma = pulseWidth / 3;
+            
+            for (let i = -numPulsePoints; i <= numPulsePoints; i++) {
+                const offsetX = i * (pulseWidth / numPulsePoints) * direction;
+                const x = centerX + offsetX;
+                const localIntensity = intensity * gaussian(offsetX, 0, sigma);
+                
+                if (localIntensity > 0.01) {
+                    // Outer glow
+                    const glowSize = 12 + localIntensity * 8;
+                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, glowSize);
+                    gradient.addColorStop(0, `rgba(255, 100, 100, ${localIntensity * 0.9})`);
+                    gradient.addColorStop(0.4, `rgba(255, 50, 50, ${localIntensity * 0.5})`);
+                    gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(x, y, glowSize, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            // Bright core at center
+            const coreGradient = ctx.createRadialGradient(centerX, y, 0, centerX, y, 10);
+            coreGradient.addColorStop(0, `rgba(255, 255, 255, ${intensity * 0.95})`);
+            coreGradient.addColorStop(0.3, `rgba(255, 200, 200, ${intensity * 0.7})`);
+            coreGradient.addColorStop(0.7, `rgba(255, 100, 100, ${intensity * 0.3})`);
+            coreGradient.addColorStop(1, 'rgba(255, 50, 50, 0)');
+            ctx.fillStyle = coreGradient;
+            ctx.beginPath();
+            ctx.arc(centerX, y, 10, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Draw Gaussian pulse along the ring
+        function drawGaussianPulseRing(cx, cy, radius, centerAngle, intensity) {
+            if (intensity <= minVisibleIntensity) return;
+            
+            const sigma = pulseWidth / 3;
+            const angularWidth = pulseWidth / radius; // Convert linear width to angular
+            
+            for (let i = -numPulsePoints; i <= numPulsePoints; i++) {
+                const offsetAngle = i * (angularWidth / numPulsePoints);
+                const angle = centerAngle + offsetAngle;
+                const x = cx + radius * Math.cos(angle);
+                const y = cy + radius * Math.sin(angle);
+                const localIntensity = intensity * gaussian(offsetAngle * radius, 0, sigma);
+                
+                if (localIntensity > 0.01) {
+                    const glowSize = 12 + localIntensity * 10;
+                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, glowSize);
+                    gradient.addColorStop(0, `rgba(255, 100, 100, ${localIntensity * 0.9})`);
+                    gradient.addColorStop(0.4, `rgba(255, 50, 50, ${localIntensity * 0.5})`);
+                    gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(x, y, glowSize, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            // Bright core at center of pulse
+            const coreX = cx + radius * Math.cos(centerAngle);
+            const coreY = cy + radius * Math.sin(centerAngle);
+            const coreGradient = ctx.createRadialGradient(coreX, coreY, 0, coreX, coreY, 12);
+            coreGradient.addColorStop(0, `rgba(255, 255, 255, ${intensity * 0.95})`);
+            coreGradient.addColorStop(0.3, `rgba(255, 200, 200, ${intensity * 0.7})`);
+            coreGradient.addColorStop(0.7, `rgba(255, 100, 100, ${intensity * 0.3})`);
+            coreGradient.addColorStop(1, 'rgba(255, 50, 50, 0)');
+            ctx.fillStyle = coreGradient;
+            ctx.beginPath();
+            ctx.arc(coreX, coreY, 12, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawGlow(x, y, intensity, size = 25) {
+            if (intensity <= minVisibleIntensity) return; // Don't draw very dim glows
+            
+            const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+            gradient.addColorStop(0, `rgba(255, 80, 80, ${intensity})`);
+            gradient.addColorStop(0.3, `rgba(255, 50, 50, ${intensity * 0.7})`);
+            gradient.addColorStop(0.6, `rgba(255, 30, 30, ${intensity * 0.3})`);
+            gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Bright core
+            const coreGradient = ctx.createRadialGradient(x, y, 0, x, y, 8);
+            coreGradient.addColorStop(0, `rgba(255, 255, 255, ${intensity * 0.8})`);
+            coreGradient.addColorStop(0.5, `rgba(255, 150, 150, ${intensity * 0.5})`);
+            coreGradient.addColorStop(1, 'rgba(255, 100, 100, 0)');
+            ctx.fillStyle = coreGradient;
+            ctx.beginPath();
+            ctx.arc(x, y, 8, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Normalize angle to 0 to 2*PI range
+        function normalizeAngle(angle) {
+            while (angle < 0) angle += Math.PI * 2;
+            while (angle >= Math.PI * 2) angle -= Math.PI * 2;
+            return angle;
+        }
+        
+        // Check if ALL light has completely died
+        function isAllLightDead() {
+            const inputDead = !inputPulse.active || inputPulse.intensity <= minVisibleIntensity;
+            const throughDead = !throughPulse.active || throughPulse.intensity <= minVisibleIntensity;
+            const dropDead = !dropPulse.active || dropPulse.intensity <= minVisibleIntensity;
+            const ringDead = !ringLight.active || ringLight.intensity <= minVisibleIntensity;
+            
+            return inputDead && throughDead && dropDead && ringDead;
+        }
+        
+        // Reset all light states
+        function resetAllLight() {
+            inputPulse = { x: 0, active: false, intensity: 0 };
+            throughPulse = { x: 0, active: false, intensity: 0 };
+            dropPulse = { x: 0, active: false, intensity: 0 };
+            ringLight = {
+                active: false,
+                angle: -Math.PI / 2,
+                intensity: 0,
+                hasCoupledBottom: false,
+                hasCoupledTop: false
+            };
+        }
+        
+        // Start a new cycle
+        function startNewCycle() {
+            resetAllLight();
+            inputPulse.x = 0;
+            inputPulse.active = true;
+            inputPulse.intensity = 1.0;
+            waitingToRestart = false;
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            const cx = width / 2;
+            const cy = height / 2;
+            const radius = 65;
+            const topY = cy - radius - 18; // Top Bus Y
+            const botY = cy + radius + 18; // Bottom Bus Y
+
+            // Draw Structure (Static)
+            drawWaveguide(0, topY, width, topY); // Top Bus
+            drawWaveguide(0, botY, width, botY); // Bottom Bus
+            drawRing(cx, cy, radius);
+
+            // 1. Input Pulse (Left to Center on top waveguide)
+            if (inputPulse.active && inputPulse.intensity > minVisibleIntensity) {
+                inputPulse.x += speed;
+                drawGaussianPulseHorizontal(inputPulse.x, topY, inputPulse.intensity, 1);
+                
+                // Coupling point reached
+                if (inputPulse.x >= cx) {
+                    inputPulse.active = false;
+                    
+                    // Part goes to through port
+                    throughPulse.active = true;
+                    throughPulse.x = cx;
+                    throughPulse.intensity = inputPulse.intensity * (1 - couplingRatio);
+                    
+                    // Part couples into ring
+                    ringLight.active = true;
+                    ringLight.angle = -Math.PI / 2; // Top of ring
+                    ringLight.intensity = inputPulse.intensity * couplingRatio;
+                    ringLight.hasCoupledTop = true; // Just coupled, don't couple again immediately
+                    ringLight.hasCoupledBottom = false;
+                }
+            } else if (inputPulse.active) {
+                inputPulse.active = false; // Kill if intensity too low
+            }
+
+            // 2. Through Pulse (continues right on top waveguide)
+            if (throughPulse.active && throughPulse.intensity > minVisibleIntensity) {
+                throughPulse.x += speed;
+                drawGaussianPulseHorizontal(throughPulse.x, topY, throughPulse.intensity, 1);
+                if (throughPulse.x > width) {
+                    throughPulse.active = false;
+                    throughPulse.intensity = 0;
+                }
+            } else if (throughPulse.active) {
+                throughPulse.active = false;
+                throughPulse.intensity = 0;
+            }
+
+            // 3. Ring Light (circulates clockwise)
+            if (ringLight.active && ringLight.intensity > minVisibleIntensity) {
+                // Move clockwise
+                ringLight.angle += (speed / radius);
+                const normAngle = normalizeAngle(ringLight.angle);
+                
+                drawGaussianPulseRing(cx, cy, radius, ringLight.angle, ringLight.intensity);
+
+                // Check for bottom coupling point (angle ~ PI/2, i.e., bottom)
+                const bottomAngle = Math.PI / 2;
+                const tolerance = 0.15;
+                
+                if (!ringLight.hasCoupledBottom && 
+                    normAngle >= bottomAngle - tolerance && 
+                    normAngle <= bottomAngle + tolerance) {
+                    
+                    ringLight.hasCoupledBottom = true;
+                    
+                    // Couple some light to drop port (travels LEFT)
+                    if (!dropPulse.active) {
+                        dropPulse.active = true;
+                        dropPulse.x = cx;
+                        dropPulse.intensity = ringLight.intensity * couplingRatio;
+                    } else {
+                        // Add to existing drop pulse
+                        dropPulse.intensity += ringLight.intensity * couplingRatio * 0.5;
+                    }
+                    
+                    // Remaining light stays in ring
+                    ringLight.intensity = ringLight.intensity * (1 - couplingRatio);
+                }
+                
+                // Reset bottom coupling flag when past bottom
+                if (normAngle > bottomAngle + tolerance && normAngle < Math.PI) {
+                    ringLight.hasCoupledBottom = false;
+                }
+
+                // Check for top coupling point (angle ~ 3*PI/2 or -PI/2, i.e., top)
+                const topAngle = 3 * Math.PI / 2;
+                
+                if (!ringLight.hasCoupledTop && 
+                    normAngle >= topAngle - tolerance && 
+                    normAngle <= topAngle + tolerance) {
+                    
+                    ringLight.hasCoupledTop = true;
+                    
+                    // Couple some light to through port (travels RIGHT)
+                    if (!throughPulse.active) {
+                        throughPulse.active = true;
+                        throughPulse.x = cx;
+                        throughPulse.intensity = ringLight.intensity * couplingRatio;
+                    } else {
+                        // Add to existing through pulse intensity
+                        throughPulse.intensity += ringLight.intensity * couplingRatio * 0.5;
+                    }
+                    
+                    // Remaining light stays in ring
+                    ringLight.intensity = ringLight.intensity * (1 - couplingRatio);
+                }
+                
+                // Reset top coupling flag when past top
+                if (normAngle > topAngle + tolerance || normAngle < Math.PI / 2) {
+                    ringLight.hasCoupledTop = false;
+                }
+
+                // If intensity too low, stop the ring
+                if (ringLight.intensity <= minVisibleIntensity) {
+                    ringLight.active = false;
+                    ringLight.intensity = 0;
+                }
+            } else if (ringLight.active) {
+                ringLight.active = false;
+                ringLight.intensity = 0;
+            }
+
+            // 4. Drop Pulse (travels LEFT on bottom waveguide)
+            if (dropPulse.active && dropPulse.intensity > minVisibleIntensity) {
+                dropPulse.x -= speed; // Moving LEFT
+                drawGaussianPulseHorizontal(dropPulse.x, botY, dropPulse.intensity, -1);
+                
+                // When exits left
+                if (dropPulse.x < 0) {
+                    dropPulse.active = false;
+                    dropPulse.intensity = 0;
+                }
+            } else if (dropPulse.active) {
+                dropPulse.active = false;
+                dropPulse.intensity = 0;
+            }
+            
+            // Check if all light is completely dead and we should restart
+            if (isAllLightDead() && !waitingToRestart) {
+                waitingToRestart = true;
+                // Wait 800ms after all light dies before starting new cycle
+                restartTimer = setTimeout(() => {
+                    startNewCycle();
+                }, 800);
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
